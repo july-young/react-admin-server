@@ -7,3 +7,6 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapping/*.xml
+
+server:
+  port: 5001

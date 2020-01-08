@@ -1,11 +1,15 @@
 package com.july.admin.common;
 
+import java.io.Serializable;
+
 /**
  * @author: july
  * @date: 2020/1/8 22:02
  * @description:
  */
-public class Result<T> {
+public class Result<T> implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String code;
 
@@ -54,5 +58,29 @@ public class Result<T> {
 
     public static <T> Result<T> fail(String msg) {
         return new Result("0", msg,null);
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }

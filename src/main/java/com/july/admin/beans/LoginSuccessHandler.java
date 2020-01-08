@@ -1,6 +1,12 @@
 package com.july.admin.beans;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.july.admin.bo.UserBO;
+import com.july.admin.common.Result;
+import com.july.admin.converter.UserConverter;
+import com.july.admin.vo.UserVO;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.security.core.Authentication;
@@ -18,25 +24,17 @@ import java.util.Map;
 @Component
 public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
+    private static final Logger logger = LoggerFactory.getLogger(LoginSuccessHandler.class);
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse resp, Authentication authException) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse resp, Authentication authentication) throws IOException, ServletException {
+        logger.info("onAuthenticationSuccess=>");
         resp.setStatus(HttpStatus.OK.value());
         resp.setContentType("application/json;charset=utf-8");
-        PrintWriter out = null;
-        try {
-            out = resp.getWriter();
-        } catch (IOException e) {
-            e.printStackTrace();
+        PrintWriter  out = resp.getWriter();
+        if(authentication.getPrincipal() instanceof UserBO){
+            Result<UserVO> result = Result.success(UserConverter.toVo((UserBO) authentication.getPrincipal()));
+            out.write(new ObjectMapper().writeValueAsString(result));
         }
-        Map<String,String> map = new HashMap<>();
-        if (authException instanceof InsufficientAuthenticationException) {
-            map.put("msg","请求失败，请联系管理员！");
-            map.put("status","0");
-        }else{
-            map.put("msg","登录成功！");
-            map.put("status","1");
-        }
-        out.write(new ObjectMapper().writeValueAsString(map));
         out.flush();
         out.close();
     }
