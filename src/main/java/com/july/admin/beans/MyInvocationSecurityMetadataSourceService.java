@@ -1,8 +1,9 @@
 package com.july.admin.beans;
 
 import com.july.admin.bo.PermissionBO;
-import com.july.admin.dao.PermissionMapper;
+import com.july.admin.common.RAPair;
 import com.july.admin.service.PermissionService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
@@ -23,7 +24,7 @@ public class MyInvocationSecurityMetadataSourceService implements FilterInvocati
     /**
      * 每一个资源所需要的角色 Collection<ConfigAttribute>决策器会用到
      */
-    private static HashMap<String, Collection<ConfigAttribute>> map =null;
+    private static HashMap<RAPair<String, String>, Collection<ConfigAttribute>> map = null;
 
 
     /**
@@ -36,10 +37,10 @@ public class MyInvocationSecurityMetadataSourceService implements FilterInvocati
         }
         //object 中包含用户请求的request 信息
         HttpServletRequest request = ((FilterInvocation) o).getHttpRequest();
-        for (Iterator<String> it = map.keySet().iterator(); it.hasNext();) {
-            String url = it.next();
-            if (new AntPathRequestMatcher( url ).matches( request )) {
-                return map.get( url );
+        for (Iterator<RAPair<String, String>> it = map.keySet().iterator(); it.hasNext(); ) {
+            RAPair<String, String> pair = it.next();
+            if (new AntPathRequestMatcher(pair.getKey(),pair.getValue()).matches(request)) {
+                return map.get(pair);
             }
         }
 
@@ -68,15 +69,19 @@ public class MyInvocationSecurityMetadataSourceService implements FilterInvocati
         for (PermissionBO rolePermission : rolePermissions) {
 
             String url = rolePermission.getUrl();
+            String method = rolePermission.getMethod();
             String roleName = rolePermission.getRoleName();
+            if(StringUtils.isBlank(roleName)){
+                continue;
+            }
             ConfigAttribute role = new SecurityConfig(roleName);
-
-            if(map.containsKey(url)){
-                map.get(url).add(role);
-            }else{
-                List<ConfigAttribute> list =  new ArrayList<>();
-                list.add( role );
-                map.put( url , list );
+            RAPair<String, String> pair = new RAPair<>(url, method);
+            if (map.containsKey(pair)) {
+                map.get(pair).add(role);
+            } else {
+                List<ConfigAttribute> list = new ArrayList<>();
+                list.add(role);
+                map.put(pair, list);
             }
         }
     }

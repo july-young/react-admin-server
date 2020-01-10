@@ -23,6 +23,14 @@ public class Permission {
 
     private Long updater;
 
+    private String icon;
+
+    private Boolean hasPub;
+
+    private Integer type;
+
+    private String method;
+
     public Long getId() {
         return id;
     }
@@ -101,5 +109,37 @@ public class Permission {
 
     public void setUpdater(Long updater) {
         this.updater = updater;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public Boolean getHasPub() {
+        return hasPub;
+    }
+
+    public void setHasPub(Boolean hasPub) {
+        this.hasPub = hasPub;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
     }
 }

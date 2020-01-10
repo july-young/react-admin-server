@@ -1,6 +1,7 @@
 package com.july.admin.service;
 
 import com.july.admin.bo.PermissionBO;
+import com.july.admin.dto.PermissionTreeDTO;
 
 import java.util.List;
 
@@ -10,5 +11,16 @@ import java.util.List;
  * @description:
  */
 public interface PermissionService {
+
+    /**
+     * 获取所有权限
+     * @return
+     */
     List<PermissionBO> getRolePermissions();
+
+    /**
+     * 获取权限树
+     * @return
+     */
+    List<PermissionTreeDTO> getPermissionsInTree();
 }

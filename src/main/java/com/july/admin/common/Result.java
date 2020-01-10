@@ -11,21 +11,21 @@ public class Result<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String code;
+    private int status;
 
     private String msg;
 
     private T data;
 
 
-    public Result(String code, String msg, T data) {
-        this.code = code;
+    public Result(int status, String msg, T data) {
+        this.status = status;
         this.msg = msg;
         this.data = data;
     }
 
-    public Result(String code, T data) {
-        this.code = code;
+    public Result(int code, T data) {
+        this.status = code;
         this.data = data;
     }
 
@@ -33,39 +33,39 @@ public class Result<T> implements Serializable {
     }
 
     public static Result success() {
-        return new Result("1", "OK");
+        return new Result(0, "OK");
     }
 
     public static <T> Result<T> success(T data) {
-        return new Result("1", data);
+        return new Result(0, data);
     }
 
     public static  Result success(String msg) {
-        return new Result("1", msg,null);
+        return new Result(0, msg,null);
     }
 
     public static <T> Result<T> success(T data,String msg) {
-        return new Result("1", msg,data);
+        return new Result(0, msg,data);
     }
 
     public static Result fail() {
-        return new Result("0", "FAIL");
+        return new Result(1, "FAIL");
     }
 
     public static <T> Result<T> fail(T data) {
-        return new Result("0", data);
+        return new Result(1, data);
     }
 
     public static <T> Result<T> fail(String msg) {
-        return new Result("0", msg,null);
+        return new Result(1, msg,null);
     }
 
-    public String getCode() {
-        return code;
+    public int getStatus() {
+        return status;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setState(int status) {
+        this.status = status;
     }
 
     public String getMsg() {

@@ -12,6 +12,10 @@
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="creator" jdbcType="BIGINT" property="creator" />
     <result column="updater" jdbcType="BIGINT" property="updater" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="has_pub" jdbcType="BIT" property="hasPub" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, url, name, description, pid, gmt_create, gmt_update, state, creator, updater
+    id, url, name, description, pid, gmt_create, gmt_update, state, creator, updater, 
+    icon, has_pub, type, method
   </sql>
   <select id="selectByExample" parameterType="com.july.admin.entity.PermissionExample" resultMap="BaseResultMap">
     select
@@ -108,11 +113,13 @@
     insert into t_permission (id, url, name, 
       description, pid, gmt_create, 
       gmt_update, state, creator, 
-      updater)
+      updater, icon, has_pub, type, 
+      method)
     values (#{id,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{pid,jdbcType=BIGINT}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtUpdate,jdbcType=TIMESTAMP}, #{state,jdbcType=TINYINT}, #{creator,jdbcType=BIGINT}, 
-      #{updater,jdbcType=BIGINT})
+      #{updater,jdbcType=BIGINT}, #{icon,jdbcType=VARCHAR}, #{hasPub,jdbcType=BIT}, #{type,jdbcType=INTEGER}, 
+      #{method,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.july.admin.entity.Permission">
     insert into t_permission
@@ -147,6 +154,18 @@
       <if test="updater != null">
         updater,
       </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="hasPub != null">
+        has_pub,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -178,6 +197,18 @@
       </if>
       <if test="updater != null">
         #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="hasPub != null">
+        #{hasPub,jdbcType=BIT},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -220,6 +251,18 @@
       <if test="record.updater != null">
         updater = #{record.updater,jdbcType=BIGINT},
       </if>
+      <if test="record.icon != null">
+        icon = #{record.icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasPub != null">
+        has_pub = #{record.hasPub,jdbcType=BIT},
+      </if>
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.method != null">
+        method = #{record.method,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -236,7 +279,11 @@
       gmt_update = #{record.gmtUpdate,jdbcType=TIMESTAMP},
       state = #{record.state,jdbcType=TINYINT},
       creator = #{record.creator,jdbcType=BIGINT},
-      updater = #{record.updater,jdbcType=BIGINT}
+      updater = #{record.updater,jdbcType=BIGINT},
+      icon = #{record.icon,jdbcType=VARCHAR},
+      has_pub = #{record.hasPub,jdbcType=BIT},
+      type = #{record.type,jdbcType=INTEGER},
+      method = #{record.method,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -271,6 +318,18 @@
       <if test="updater != null">
         updater = #{updater,jdbcType=BIGINT},
       </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="hasPub != null">
+        has_pub = #{hasPub,jdbcType=BIT},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -284,7 +343,11 @@
       gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
       state = #{state,jdbcType=TINYINT},
       creator = #{creator,jdbcType=BIGINT},
-      updater = #{updater,jdbcType=BIGINT}
+      updater = #{updater,jdbcType=BIGINT},
+      icon = #{icon,jdbcType=VARCHAR},
+      has_pub = #{hasPub,jdbcType=BIT},
+      type = #{type,jdbcType=INTEGER},
+      method = #{method,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

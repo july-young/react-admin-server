@@ -2,10 +2,7 @@ package com.july.admin.util;
 
 import org.springframework.util.CollectionUtils;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -25,5 +22,14 @@ public class ReactAdminCollectionUtils extends CollectionUtils {
                 .collect(Collectors.toMap(keyFun,valueFun));
     }
 
+    public static  <T,K> Set<K> toSet(Collection<T> collection, Function<T,K> keyFun){
+        return collection.stream().filter(Objects::nonNull).map(keyFun)
+                .collect(Collectors.toSet());
+    }
+
+    public static  <T,K> List<K> toSetList(Collection<T> collection, Function<T,K> keyFun){
+        return collection.stream().filter(Objects::nonNull).map(keyFun).distinct()
+                .collect(Collectors.toList());
+    }
 
 }
