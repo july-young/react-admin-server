@@ -33,7 +33,7 @@ public class PermissionConverter implements Converter<Permission, PermissionBO> 
     private List<PermissionTreeDTO> treefy(List<PermissionTreeDTO> dtoList,Long pid){
 
         List<PermissionTreeDTO> dtos = dtoList.stream().filter(x -> pid.equals(x.getPid())).collect(Collectors.toList());
-        List<PermissionTreeDTO> other = dtoList.stream().filter(x -> pid.equals(x.getPid())).collect(Collectors.toList());
+        List<PermissionTreeDTO> other = dtoList.stream().filter(x -> !pid.equals(x.getPid())).collect(Collectors.toList());
 
         for(PermissionTreeDTO dto:dtos){
             dto.setChildren(treefy(other,dto.getId()));
