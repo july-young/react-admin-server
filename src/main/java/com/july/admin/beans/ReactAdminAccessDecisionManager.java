@@ -17,9 +17,9 @@ import java.util.Iterator;
  * 决策器
  */
 @Component
-public class MyAccessDecisionManager implements AccessDecisionManager {
+public class ReactAdminAccessDecisionManager implements AccessDecisionManager {
 
-    private final static Logger logger = LoggerFactory.getLogger(MyAccessDecisionManager.class);
+    private final static Logger logger = LoggerFactory.getLogger(ReactAdminAccessDecisionManager.class);
 
     /**
      * 通过传递的参数来决定用户是否有访问对应受保护对象的权限

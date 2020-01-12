@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 
 @Component
-public class MyInvocationSecurityMetadataSourceService implements FilterInvocationSecurityMetadataSource {
+public class ReactAdminInvocationSecurityMetadataSourceService implements FilterInvocationSecurityMetadataSource {
 
     @Autowired
     private PermissionService permissionService;

@@ -12,14 +12,14 @@ import javax.servlet.*;
 import java.io.IOException;
 
 @Component
-public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
+public class ReactAdminFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
 
 
     @Autowired
     private FilterInvocationSecurityMetadataSource securityMetadataSource;
 
     @Autowired
-    public void setMyAccessDecisionManager(MyAccessDecisionManager myAccessDecisionManager) {
+    public void setMyAccessDecisionManager(ReactAdminAccessDecisionManager myAccessDecisionManager) {
         super.setAccessDecisionManager(myAccessDecisionManager);
     }
 

@@ -3,12 +3,12 @@ package com.july.admin.service.impl;
 import com.july.admin.bo.RoleBO;
 import com.july.admin.bo.UserBO;
 import com.july.admin.common.Converter;
+import com.july.admin.converter.RoleConverter;
+import com.july.admin.dao.RelationRolePermissionMapper;
 import com.july.admin.dao.RelationUserRoleMapper;
 import com.july.admin.dao.RoleMapper;
-import com.july.admin.entity.RelationUserRole;
-import com.july.admin.entity.RelationUserRoleExample;
-import com.july.admin.entity.Role;
-import com.july.admin.entity.RoleExample;
+import com.july.admin.entity.*;
+import com.july.admin.service.PermissionService;
 import com.july.admin.service.RoleService;
 import com.july.admin.util.ReactAdminCollectionUtils;
 import org.springframework.beans.BeanUtils;
@@ -25,12 +25,18 @@ import java.util.stream.Collectors;
  * @description:
  */
 @Service
-public class RoleServiceImpl implements RoleService, Converter<Role, RoleBO> {
+public class RoleServiceImpl implements RoleService{
 
     @Autowired
     private RoleMapper roleMapper;
     @Autowired
     private RelationUserRoleMapper relationUserRoleMapper;
+    @Autowired
+    private RelationRolePermissionMapper relationRolePermissionMapper;
+    @Autowired
+    private PermissionService permissionService;
+    @Autowired
+    private RoleConverter roleConverter;
 
 
     @Override
@@ -55,26 +61,8 @@ public class RoleServiceImpl implements RoleService, Converter<Role, RoleBO> {
 
         List<Role> roles = roleMapper.selectByExample(roleExample);
 
-        return ReactAdminCollectionUtils.extractList(roles,x->convert(x));
+        return roleConverter.convert(roles);
     }
 
-    @Override
-    public RoleBO convert(Role d) {
-        if (d == null) {
-            return null;
-        }
-        RoleBO roleBO = new RoleBO();
-        BeanUtils.copyProperties(d, roleBO);
-        return roleBO;
-    }
 
-    @Override
-    public Role revert(RoleBO b) {
-        if (b == null) {
-            return null;
-        }
-        Role role = new Role();
-        BeanUtils.copyProperties(b, role);
-        return role;
-    }
 }

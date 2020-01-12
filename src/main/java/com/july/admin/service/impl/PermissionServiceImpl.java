@@ -51,6 +51,17 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
+    public List<PermissionBO> getMenus() {
+        PermissionExample permissionExample = new PermissionExample();
+        permissionExample.createCriteria()
+                .andStateEqualTo(ReactAdminConstant.MetaState.VALID)
+                .andTypeEqualTo(PermissionConstant.TYPE_PAGE);
+        List<Permission> permissions = permissionMapper.selectByExample(permissionExample);
+        return convert(permissions);
+
+    }
+
+    @Override
     public List<PermissionTreeDTO> getPermissionsInTree() {
         PermissionExample permissionExample = new PermissionExample();
         permissionExample.createCriteria()

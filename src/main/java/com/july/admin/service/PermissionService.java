@@ -19,6 +19,12 @@ public interface PermissionService {
     List<PermissionBO> getRolePermissions();
 
     /**
+     * 获取所有菜单
+     * @return
+     */
+    List<PermissionBO> getMenus();
+
+    /**
      * 获取权限树
      * @return
      */

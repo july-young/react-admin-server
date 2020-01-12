@@ -1,5 +1,6 @@
 package com.july.admin.vo;
 
+import com.july.admin.bo.RoleBO;
 import org.springframework.security.core.Authentication;
 
 import java.io.Serializable;
@@ -18,7 +19,7 @@ public class UserVO implements Serializable {
 
     private Long userId;
 
-    private List<String> roles;
+    private List<RoleBO> roles;
 
     public String getUsername() {
         return username;
@@ -28,19 +29,19 @@ public class UserVO implements Serializable {
         this.username = username;
     }
 
-    public List<String> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<String> roles) {
-        this.roles = roles;
-    }
-
     public Long getUserId() {
         return userId;
     }
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public List<RoleBO> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RoleBO> roles) {
+        this.roles = roles;
     }
 }

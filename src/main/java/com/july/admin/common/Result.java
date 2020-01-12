@@ -60,6 +60,10 @@ public class Result<T> implements Serializable {
         return new Result(1, msg,null);
     }
 
+    public static <T> Result<T> fail(int status,String msg) {
+        return new Result(status, msg,null);
+    }
+
     public int getStatus() {
         return status;
     }

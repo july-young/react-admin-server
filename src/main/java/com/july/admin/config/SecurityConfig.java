@@ -5,7 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.july.admin.beans.LoginFailureHandler;
 import com.july.admin.beans.LoginSuccessHandler;
 import com.july.admin.common.Result;
-import com.july.admin.management.MyUserDetailsService;
+import com.july.admin.constant.ResultConstant;
+import com.july.admin.management.ReactAdminUserDetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
     @Autowired
-    private MyUserDetailsService userService;
+    private ReactAdminUserDetailsService userService;
 
     @Autowired
     private LoginSuccessHandler loginSuccessHandler;
@@ -84,7 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) -> {
                             if (authException instanceof InsufficientAuthenticationException) {
-                                postHandler(response, Result.fail("请求失败，请联系管理员!"));
+                                postHandler(response, Result.fail(ResultConstant.authFail,"身份认证失败，请重新登录!"));
                             }
                         }
                 );

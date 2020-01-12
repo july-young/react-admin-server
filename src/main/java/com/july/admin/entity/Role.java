@@ -1,8 +1,14 @@
 package com.july.admin.entity;
 
+
+import com.july.admin.common.ToString;
+
 import java.util.Date;
 
-public class Role {
+/**
+ * @author july
+ */
+public class Role extends ToString {
     private Long id;
 
     private String name;
