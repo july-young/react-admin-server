@@ -26,4 +26,13 @@ public class BaseQuery extends ToString{
     public void setSize(Integer size) {
         this.size = size;
     }
+
+    public void check(){
+        if(page==null || page<0 ){
+            page=1;
+        }
+        if(size==null || size <0){
+            size=10;
+        }
+    }
 }

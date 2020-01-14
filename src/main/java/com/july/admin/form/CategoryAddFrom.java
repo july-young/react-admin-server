@@ -4,6 +4,9 @@ import com.july.admin.bo.CategoryBO;
 import com.july.admin.common.FormConverter;
 import org.springframework.beans.BeanUtils;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 /**
  * @author: july
  * @date: 2020/1/14 20:18
@@ -11,6 +14,8 @@ import org.springframework.beans.BeanUtils;
  */
 public class CategoryAddFrom implements FormConverter<CategoryBO> {
 
+    @NotBlank(message = "分类名称需要在2-20个字符之间")
+    @Size(min = 2,max = 20,message = "分类名称需要在2-20个字符之间")
     private String name;
 
     private Long parentId;

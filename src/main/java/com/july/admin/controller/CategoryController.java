@@ -10,6 +10,7 @@ import com.july.admin.query.CategoryQuery;
 import com.july.admin.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -28,14 +29,15 @@ public class CategoryController {
     @ResponseBody
     public Result query(CategoryQuery categoryQuery) {
 
+        categoryQuery.check();
         PageInfo<CategoryBO> pageInfo = categoryService.query(categoryQuery);
 
-        return Result.success(Page.getInstance(pageInfo));
+        return Result.success(pageInfo.getList());
     }
 
     @PostMapping("category")
     @ResponseBody
-    public Result add(CategoryAddFrom form) {
+    public Result add(@RequestBody @Validated CategoryAddFrom form) {
 
         CategoryBO bo = categoryService.add(form.toBO());
 
@@ -44,7 +46,7 @@ public class CategoryController {
 
     @PutMapping("category")
     @ResponseBody
-    public Result update(CategoryUpdateForm form) {
+    public Result update(@RequestBody @Validated CategoryUpdateForm form) {
 
         CategoryBO bo = categoryService.update(form.toBO());
 

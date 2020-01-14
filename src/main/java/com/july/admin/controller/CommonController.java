@@ -2,6 +2,7 @@ package com.july.admin.controller;
 
 import com.july.admin.common.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +22,13 @@ public class CommonController {
 
     @GetMapping("weather")
     @ResponseBody
+    @Cacheable("weather")
     public Result getWeather(String cityId){
         RestTemplate restTemplate = new RestTemplate();
 
-//        Map<String,Object> map = restTemplate
-//                .getForObject("http://t.weather.sojson.com/api/weather/city/" + cityId,
-//                        Map.class);
-        return Result.fail();
+        Map<String,Object> map = restTemplate
+                .getForObject("http://t.weather.sojson.com/api/weather/city/" + cityId,
+                        Map.class);
+        return Result.success(map);
     }
 }

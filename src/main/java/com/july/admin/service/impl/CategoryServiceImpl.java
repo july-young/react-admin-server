@@ -2,6 +2,7 @@ package com.july.admin.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.july.admin.beans.SnowflakeIdWorker;
 import com.july.admin.bo.CategoryBO;
 import com.july.admin.constant.ReactAdminConstant;
 import com.july.admin.converter.CategoryConverter;
@@ -28,12 +29,17 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryMapper categoryMapper;
     @Autowired
     private CategoryConverter categoryConverter;
+    @Autowired
+    private SnowflakeIdWorker snowflakeIdWorker;
 
     @Override
     public PageInfo<CategoryBO> query(CategoryQuery categoryQuery) {
 
         CategoryExample categoryExample = new CategoryExample();
-        categoryExample.createCriteria().andStateEqualTo(ReactAdminConstant.MetaState.VALID);
+        categoryExample.createCriteria()
+                .andParentIdEqualTo(categoryQuery.getParentId())
+                .andStateEqualTo(ReactAdminConstant.MetaState.VALID);
+
         PageHelper.startPage(categoryQuery.getPage(),categoryQuery.getSize());
         List<Category> categories = categoryMapper.selectByExample(categoryExample);
         List<CategoryBO> list = ReactAdminCollectionUtils.extractList(categories, x -> categoryConverter.convert(x));
@@ -47,12 +53,30 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryBO update(CategoryBO bo) {
-        return null;
+        Category category = categoryConverter.revert(bo);
+
+
+        CategoryExample categoryExample = new CategoryExample();
+        categoryExample.createCriteria().andIdEqualTo(bo.getId());
+
+        categoryMapper.updateByExampleSelective(category,categoryExample);
+
+        Category res = categoryMapper.selectByPrimaryKey(bo.getId());
+        return categoryConverter.convert(res);
     }
 
     @Override
     public CategoryBO add(CategoryBO bo) {
-        return null;
+
+        long id = snowflakeIdWorker.nextId();
+
+        Category category = categoryConverter.revert(bo);
+        category.setId(id);
+
+        categoryMapper.insertSelective(category);
+
+        Category res = categoryMapper.selectByPrimaryKey(id);
+        return categoryConverter.convert(res);
     }
 
 

@@ -18,4 +18,6 @@ public class CategoryQuery extends BaseQuery {
     public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
+
+
 }
