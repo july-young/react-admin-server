@@ -32,7 +32,19 @@ CREATE TABLE `r_role_permission` (
 insert  into `r_role_permission`(`id`,`role_id`,`permission_id`) values
 (1,1,1),
 (2,2,2),
-(3,2,1);
+(3,2,1),
+(4,2,14),
+(5,2,3),
+(6,2,4),
+(7,2,5),
+(8,2,6),
+(9,2,7),
+(10,2,8),
+(11,2,9),
+(12,2,10),
+(13,2,11),
+(14,2,12),
+(15,2,13);
 
 /*Table structure for table `r_user_role` */
 
@@ -52,6 +64,33 @@ insert  into `r_user_role`(`id`,`user_id`,`role_id`) values
 (2,2,1),
 (3,2,2);
 
+/*Table structure for table `t_category` */
+
+DROP TABLE IF EXISTS `t_category`;
+
+CREATE TABLE `t_category` (
+  `id` bigint(11) NOT NULL AUTO_INCREMENT COMMENT '数据id',
+  `name` varchar(255) NOT NULL COMMENT '分类名称',
+  `version` int(255) NOT NULL DEFAULT '1' COMMENT '版本',
+  `gmt_create` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '数据的创建时间',
+  `gmt_update` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '数据的修改时间',
+  `state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1有效 0删除',
+  `creator` bigint(20) NOT NULL DEFAULT '0' COMMENT '数据创建人  0系统',
+  `updater` bigint(20) NOT NULL DEFAULT '0' COMMENT '数据更新人  0系统',
+  `parent_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=666795643460648961 DEFAULT CHARSET=utf8mb4;
+
+/*Data for the table `t_category` */
+
+insert  into `t_category`(`id`,`name`,`version`,`gmt_create`,`gmt_update`,`state`,`creator`,`updater`,`parent_id`) values
+(666785609326526464,'家用电器',1,'2020-01-14 23:28:00','2020-01-14 23:28:00',1,0,0,0),
+(666785743896576000,'医药食品2',1,'2020-01-14 23:28:29','2020-01-14 23:28:29',1,0,0,0),
+(666795589391876096,'AAA',1,'2020-01-15 00:07:36','2020-01-15 00:07:36',1,0,0,0),
+(666795613643341824,'BBB',1,'2020-01-15 00:07:42','2020-01-15 00:07:42',1,0,0,0),
+(666795629644611584,'CCC',1,'2020-01-15 00:07:46','2020-01-15 00:07:46',1,0,0,0),
+(666795643460648960,'DDD',1,'2020-01-15 00:07:49','2020-01-15 00:07:49',1,0,0,0);
+
 /*Table structure for table `t_permission` */
 
 DROP TABLE IF EXISTS `t_permission`;
@@ -70,9 +109,9 @@ CREATE TABLE `t_permission` (
   `icon` varchar(31) CHARACTER SET latin1 DEFAULT NULL COMMENT 'icon图标',
   `has_pub` tinyint(1) DEFAULT '0' COMMENT '是否公开',
   `type` int(11) DEFAULT '1' COMMENT '1 接口 2 menu',
-  `method` varchar(7) DEFAULT NULL COMMENT 'get post put delete',
+  `method` varchar(7) DEFAULT 'GET' COMMENT 'get post put delete',
   PRIMARY KEY (`id`,`pid`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `t_permission` */
 
@@ -89,7 +128,8 @@ insert  into `t_permission`(`id`,`url`,`name`,`description`,`pid`,`gmt_create`,`
 (10,'/charts/bar','柱形图',NULL,9,NULL,NULL,1,0,0,'bar-chart',0,2,NULL),
 (11,'/charts/line','折线图',NULL,9,NULL,NULL,1,0,0,'line-chart',0,2,NULL),
 (12,'/charts/pie','饼图',NULL,9,NULL,NULL,1,0,0,'pie-chart',0,2,NULL),
-(13,'/order','订单管理',NULL,0,NULL,NULL,1,0,0,'windows',0,2,NULL);
+(13,'/order','订单管理',NULL,0,NULL,NULL,1,0,0,'windows',0,2,NULL),
+(14,'weather','获取天气',NULL,0,NULL,NULL,1,0,0,NULL,0,1,'GET');
 
 /*Table structure for table `t_role` */
 
@@ -118,15 +158,15 @@ DROP TABLE IF EXISTS `t_user`;
 
 CREATE TABLE `t_user` (
   `id` bigint(11) NOT NULL AUTO_INCREMENT COMMENT '数据id',
-  `username` varchar(255) NOT NULL COMMENT '用户名称',
-  `password` varchar(255) NOT NULL COMMENT '密码',
+  `username` varchar(255) CHARACTER SET latin1 NOT NULL COMMENT '用户名称',
+  `password` varchar(255) CHARACTER SET latin1 NOT NULL COMMENT '密码',
   `gmt_create` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '数据的创建时间',
   `gmt_update` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '数据的修改时间',
   `state` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1有效 0删除',
   `creator` bigint(20) NOT NULL DEFAULT '0' COMMENT '数据创建人  0系统',
   `updater` bigint(20) NOT NULL DEFAULT '0' COMMENT '数据更新人  0系统',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 /*Data for the table `t_user` */
 
