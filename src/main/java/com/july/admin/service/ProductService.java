@@ -2,21 +2,23 @@ package com.july.admin.service;
 
 import com.github.pagehelper.PageInfo;
 import com.july.admin.bo.CategoryBO;
+import com.july.admin.bo.ProductBO;
 import com.july.admin.query.CategoryQuery;
+import com.july.admin.query.ProductQuery;
 
 /**
  * @author: july
  * @date: 2020/1/14 00:05
  * @description:
  */
-public interface CategoryService {
+public interface ProductService {
 
-    PageInfo<CategoryBO> query(CategoryQuery categoryQuery);
+    PageInfo<ProductBO> query(ProductQuery productQuery);
 
     Integer remove(Long id);
 
-    CategoryBO update(CategoryBO bo);
+    ProductBO update(ProductBO bo);
 
-    CategoryBO add(CategoryBO bo);
+    ProductBO add(ProductBO bo);
 
 }

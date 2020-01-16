@@ -23,7 +23,7 @@ import java.net.ConnectException;
 @Service("fileStoreService")
 public class FtpFileServiceImpl implements FileStoreService {
 
-    private final static Logger logger = LoggerFactory.getLogger(ReactAdminAccessDecisionManager.class);
+    private final static Logger logger = LoggerFactory.getLogger(FtpFileServiceImpl.class);
 
     /**
      * ftp服务器地址
