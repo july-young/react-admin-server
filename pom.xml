@@ -20,7 +20,7 @@
         <joda.time.version>2.9.9</joda.time.version>
         <mybatis.version>2.1.1</mybatis.version>
         <beanutils.version>1.8.3</beanutils.version>
-        <pagehelper.version>5.0.0</pagehelper.version>
+        <pagehelper.version>1.2.3</pagehelper.version>
         <jsqlparser.version>0.9.1</jsqlparser.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-net.version>3.1</commons-net.version>
@@ -86,8 +86,8 @@
         </dependency>
         <dependency>
             <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>${pagehelper.version}</version>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
         </dependency>
         <dependency>
             <groupId>com.github.jsqlparser</groupId>
@@ -117,6 +117,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>

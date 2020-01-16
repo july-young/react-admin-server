@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public PageInfo<ProductBO> query(ProductQuery productQuery) {
 
-        PageHelper.startPage(productQuery.getPage(),productQuery.getSize());
+
         ProductExample example = new ProductExample();
         ProductExample.Criteria criteria = example.createCriteria()
                 .andStateEqualTo(ReactAdminConstant.MetaState.VALID);
@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService {
             criteria.andDetailLike(productQuery.getDetail());
         }
 
-
+        PageHelper.startPage(productQuery.getPage(),productQuery.getSize());
         List<Product> products = productMapper.selectByExample(example);
 
         List<ProductBO> productBOS = ReactAdminCollectionUtils.extractList(products, x -> productConverter.convert(x));

@@ -40,3 +40,10 @@ ftp:
   pass: ftpuser
   user: 12345678
   port: 21
+
+pagehelper:
+    helperDialect: mysql
+    page-size-zero: true
+    params: count=countSql
+    reasonable: false
+    supportMethodsArguments: true
