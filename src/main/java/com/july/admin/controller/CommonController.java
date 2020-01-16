@@ -1,15 +1,19 @@
 package com.july.admin.controller;
 
 import com.july.admin.common.Result;
+import com.july.admin.service.FileStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.Base64;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author: july
@@ -19,6 +23,9 @@ import java.util.Map;
 @Controller
 public class CommonController {
 
+
+    @Autowired
+    private FileStoreService localFileService;
 
     @GetMapping("weather")
     @ResponseBody
@@ -30,5 +37,15 @@ public class CommonController {
                 .getForObject("http://t.weather.sojson.com/api/weather/city/" + cityId,
                         Map.class);
         return Result.success(map);
+    }
+
+    @PostMapping(value = "/file/import")
+    public Result<String> importExcel(@RequestParam("file") MultipartFile file) throws Exception {
+
+        String name = file.getOriginalFilename();
+        String path = localFileService.upload(name,file);
+
+
+        return Result.success(path);
     }
 }

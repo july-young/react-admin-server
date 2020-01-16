@@ -31,3 +31,12 @@ redis:
   # 连接池中的最小空闲连接
   min-idle: 10
 
+
+ftp:
+  server:
+    ip: 47.91.214.23
+    http:
+      prefix: 47.91.214.23/
+  pass: ftpuser
+  user: 12345678
+  port: 21
