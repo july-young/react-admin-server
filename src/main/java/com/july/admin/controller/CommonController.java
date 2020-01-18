@@ -39,8 +39,9 @@ public class CommonController {
         return Result.success(map);
     }
 
-    @PostMapping(value = "/file/import")
-    public Result<String> importExcel(@RequestParam("file") MultipartFile file) throws Exception {
+    @ PostMapping(value = "img/upload")
+    @ResponseBody
+    public Result<String> importExcel(@RequestParam("img") MultipartFile file) throws Exception {
 
         String name = file.getOriginalFilename();
         String path = localFileService.upload(name,file);

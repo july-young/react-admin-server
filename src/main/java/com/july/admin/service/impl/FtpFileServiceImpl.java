@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.net.ConnectException;
+import java.util.UUID;
 
 /**
  * @author: july
@@ -24,6 +25,8 @@ import java.net.ConnectException;
 public class FtpFileServiceImpl implements FileStoreService {
 
     private final static Logger logger = LoggerFactory.getLogger(FtpFileServiceImpl.class);
+
+
 
     /**
      * ftp服务器地址
@@ -45,6 +48,12 @@ public class FtpFileServiceImpl implements FileStoreService {
      */
     @Value("${ftp.pass}")
     private String password;
+
+    /**
+     *
+     */
+    @Value("${ftp.path}")
+    private String basePath;
 
     public FtpFileServiceImpl() {
     }
@@ -82,11 +91,16 @@ public class FtpFileServiceImpl implements FileStoreService {
             if (paths.length > 1) {
                 mkdir(remoteFileName.substring(remoteFileName.lastIndexOf('/')));
             }
+            String type = remoteFileName.substring(remoteFileName.lastIndexOf('.'));
             //上传文件
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(file.getBytes());
-            ftp.storeFile(remoteFileName, byteArrayInputStream);
+            remoteFileName =UUID.nameUUIDFromBytes(remoteFileName.getBytes()).toString()+type;
+            boolean saveResult = ftp.storeFile(basePath + remoteFileName, byteArrayInputStream);
             //退出
             logout(ftp);
+            if(!saveResult){
+                return "";
+            }
             return remoteFileName;
         } catch (Exception e) {
             logger.error("upload=>" + e.getMessage());
