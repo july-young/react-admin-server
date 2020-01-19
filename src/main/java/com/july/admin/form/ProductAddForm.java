@@ -1,24 +1,25 @@
-package com.july.admin.entity;
+package com.july.admin.form;
+
+import com.july.admin.bo.ProductBO;
+import com.july.admin.common.FormConverter;
+import com.july.admin.entity.Product;
+import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Product {
-    private Long id;
+/**
+ * @author: july
+ * @date: 2020/1/19 20:48
+ * @description:
+ */
+public class ProductAddForm implements FormConverter<ProductBO> {
 
     private String name;
 
     private Integer version;
 
-    private Date gmtCreate;
-
-    private Date gmtUpdate;
-
     private Byte state;
-
-    private Long creator;
-
-    private Long updater;
 
     private String imgs;
 
@@ -26,21 +27,11 @@ public class Product {
 
     private String detail;
 
+    private String description;
+
     private Long pCategoryId;
 
     private Long categoryId;
-
-    private String description;
-
-    private Byte status;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -58,44 +49,12 @@ public class Product {
         this.version = version;
     }
 
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtUpdate() {
-        return gmtUpdate;
-    }
-
-    public void setGmtUpdate(Date gmtUpdate) {
-        this.gmtUpdate = gmtUpdate;
-    }
-
     public Byte getState() {
         return state;
     }
 
     public void setState(Byte state) {
         this.state = state;
-    }
-
-    public Long getCreator() {
-        return creator;
-    }
-
-    public void setCreator(Long creator) {
-        this.creator = creator;
-    }
-
-    public Long getUpdater() {
-        return updater;
-    }
-
-    public void setUpdater(Long updater) {
-        this.updater = updater;
     }
 
     public String getImgs() {
@@ -138,19 +97,18 @@ public class Product {
         this.categoryId = categoryId;
     }
 
+    @Override
+    public ProductBO toBO() {
+        ProductBO productBO = new ProductBO();
+        BeanUtils.copyProperties(this,productBO);
+        return productBO;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
     }
 }

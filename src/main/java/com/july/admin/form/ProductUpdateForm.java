@@ -1,9 +1,18 @@
-package com.july.admin.entity;
+package com.july.admin.form;
+
+import com.july.admin.bo.ProductBO;
+import com.july.admin.common.FormConverter;
+import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Product {
+/**
+ * @author: july
+ * @date: 2020/1/19 21:00
+ * @description:
+ */
+public class ProductUpdateForm implements FormConverter<ProductBO> {
     private Long id;
 
     private String name;
@@ -16,10 +25,6 @@ public class Product {
 
     private Byte state;
 
-    private Long creator;
-
-    private Long updater;
-
     private String imgs;
 
     private BigDecimal price;
@@ -29,10 +34,6 @@ public class Product {
     private Long pCategoryId;
 
     private Long categoryId;
-
-    private String description;
-
-    private Byte status;
 
     public Long getId() {
         return id;
@@ -82,22 +83,6 @@ public class Product {
         this.state = state;
     }
 
-    public Long getCreator() {
-        return creator;
-    }
-
-    public void setCreator(Long creator) {
-        this.creator = creator;
-    }
-
-    public Long getUpdater() {
-        return updater;
-    }
-
-    public void setUpdater(Long updater) {
-        this.updater = updater;
-    }
-
     public String getImgs() {
         return imgs;
     }
@@ -138,19 +123,10 @@ public class Product {
         this.categoryId = categoryId;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Byte getStatus() {
-        return status;
-    }
-
-    public void setStatus(Byte status) {
-        this.status = status;
+    @Override
+    public ProductBO toBO() {
+        ProductBO productBO = new ProductBO();
+        BeanUtils.copyProperties(this,productBO);
+        return productBO;
     }
 }

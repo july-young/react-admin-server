@@ -3,6 +3,7 @@ package com.july.admin.service;
 import com.github.pagehelper.PageInfo;
 import com.july.admin.bo.CategoryBO;
 import com.july.admin.bo.ProductBO;
+import com.july.admin.enums.ProductStatusEnum;
 import com.july.admin.query.CategoryQuery;
 import com.july.admin.query.ProductQuery;
 
@@ -21,4 +22,5 @@ public interface ProductService {
 
     ProductBO add(ProductBO bo);
 
+    int updateStatus(Long id, ProductStatusEnum productStatusEnum);
 }

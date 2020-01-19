@@ -15,6 +15,8 @@
     <result column="detail" jdbcType="VARCHAR" property="detail" />
     <result column="p_category_id" jdbcType="BIGINT" property="pCategoryId" />
     <result column="category_id" jdbcType="BIGINT" property="categoryId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="status" jdbcType="TINYINT" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, name, version, gmt_create, gmt_update, state, creator, updater, imgs, price, 
-    detail, p_category_id, category_id
+    detail, p_category_id, category_id, description, status
   </sql>
   <select id="selectByExample" parameterType="com.july.admin.entity.ProductExample" resultMap="BaseResultMap">
     select
@@ -113,12 +115,14 @@
       gmt_create, gmt_update, state, 
       creator, updater, imgs, 
       price, detail, p_category_id, 
-      category_id)
+      category_id, description, status
+      )
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{version,jdbcType=INTEGER}, 
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtUpdate,jdbcType=TIMESTAMP}, #{state,jdbcType=TINYINT}, 
       #{creator,jdbcType=BIGINT}, #{updater,jdbcType=BIGINT}, #{imgs,jdbcType=VARCHAR}, 
       #{price,jdbcType=DECIMAL}, #{detail,jdbcType=VARCHAR}, #{pCategoryId,jdbcType=BIGINT}, 
-      #{categoryId,jdbcType=BIGINT})
+      #{categoryId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.july.admin.entity.Product">
     insert into t_product
@@ -162,6 +166,12 @@
       <if test="categoryId != null">
         category_id,
       </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -202,6 +212,12 @@
       </if>
       <if test="categoryId != null">
         #{categoryId,jdbcType=BIGINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
       </if>
     </trim>
   </insert>
@@ -253,6 +269,12 @@
       <if test="record.categoryId != null">
         category_id = #{record.categoryId,jdbcType=BIGINT},
       </if>
+      <if test="record.description != null">
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -272,7 +294,9 @@
       price = #{record.price,jdbcType=DECIMAL},
       detail = #{record.detail,jdbcType=VARCHAR},
       p_category_id = #{record.pCategoryId,jdbcType=BIGINT},
-      category_id = #{record.categoryId,jdbcType=BIGINT}
+      category_id = #{record.categoryId,jdbcType=BIGINT},
+      description = #{record.description,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -316,6 +340,12 @@
       <if test="categoryId != null">
         category_id = #{categoryId,jdbcType=BIGINT},
       </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -332,7 +362,9 @@
       price = #{price,jdbcType=DECIMAL},
       detail = #{detail,jdbcType=VARCHAR},
       p_category_id = #{pCategoryId,jdbcType=BIGINT},
-      category_id = #{categoryId,jdbcType=BIGINT}
+      category_id = #{categoryId,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
