@@ -16,4 +16,10 @@ public interface FileStore {
      */
     String upload(String remoteFileName, MultipartFile file);
 
+    /**
+     * 移除文件
+     * @return
+     */
+    boolean remove(String remoteFileName);
+
 }

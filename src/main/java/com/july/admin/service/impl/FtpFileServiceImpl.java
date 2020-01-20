@@ -1,6 +1,5 @@
 package com.july.admin.service.impl;
 
-import com.july.admin.beans.ReactAdminAccessDecisionManager;
 import com.july.admin.service.FileStoreService;
 import org.apache.commons.net.PrintCommandListener;
 import org.apache.commons.net.ftp.FTP;
@@ -25,7 +24,6 @@ import java.util.UUID;
 public class FtpFileServiceImpl implements FileStoreService {
 
     private final static Logger logger = LoggerFactory.getLogger(FtpFileServiceImpl.class);
-
 
 
     /**
@@ -58,8 +56,7 @@ public class FtpFileServiceImpl implements FileStoreService {
     public FtpFileServiceImpl() {
     }
 
-    public FtpFileServiceImpl(String server, int port, String username,
-                              String password) {
+    public FtpFileServiceImpl(String server, int port, String username, String password) {
         this.server = server;
         this.port = port;
         this.username = username;
@@ -77,10 +74,7 @@ public class FtpFileServiceImpl implements FileStoreService {
         logger.info("upload=>remoteFileName : " + remoteFileName);
         FTPClient ftp = null;
         try {
-
-
             ftp = new FTPClient();
-
             ftp.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out), true));
             //连接ftp服务器
             connect(ftp);
@@ -94,11 +88,11 @@ public class FtpFileServiceImpl implements FileStoreService {
             String type = remoteFileName.substring(remoteFileName.lastIndexOf('.'));
             //上传文件
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(file.getBytes());
-            remoteFileName =UUID.nameUUIDFromBytes(remoteFileName.getBytes()).toString()+type;
+            remoteFileName = UUID.nameUUIDFromBytes(remoteFileName.getBytes()).toString() + type;
             boolean saveResult = ftp.storeFile(basePath + remoteFileName, byteArrayInputStream);
             //退出
             logout(ftp);
-            if(!saveResult){
+            if (!saveResult) {
                 return "";
             }
             return remoteFileName;
@@ -114,6 +108,35 @@ public class FtpFileServiceImpl implements FileStoreService {
             }
         }
         return "";
+    }
+
+    @Override
+    public boolean remove(String remoteFileName) {
+        logger.info("remove=>remoteFileName : " + remoteFileName);
+        FTPClient ftp = null;
+        try {
+            ftp = new FTPClient();
+            ftp.addProtocolCommandListener(new PrintCommandListener(new PrintWriter(System.out), true));
+            //连接ftp服务器
+            connect(ftp);
+            //设置属性
+            setProperty(ftp);
+            boolean remoteStore = ftp.remoteStore(basePath + remoteFileName);
+            //退出
+            logout(ftp);
+            return remoteStore;
+        } catch (Exception e) {
+            logger.error("remove=>" + e.getMessage());
+        } finally {
+            if (ftp.isConnected()) {
+                try {
+                    ftp.disconnect();
+                } catch (IOException ioe) {
+                    logger.error("remove=>" + ioe.getMessage());
+                }
+            }
+        }
+        return false;
     }
 
     /**

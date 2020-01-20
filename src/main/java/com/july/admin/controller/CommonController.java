@@ -29,7 +29,7 @@ public class CommonController {
 
     @GetMapping("weather")
     @ResponseBody
-    @Cacheable("weather")
+    @Cacheable(value = "weather",key = "#cityId")
     public Result getWeather(String cityId){
         RestTemplate restTemplate = new RestTemplate();
 
@@ -41,10 +41,18 @@ public class CommonController {
 
     @PostMapping(value = "img/upload")
     @ResponseBody
-    public Result<String> importExcel(@RequestParam("file") MultipartFile file) throws Exception {
+    public Result<String> uploadImg(@RequestParam("file") MultipartFile file) throws Exception {
 
         String name = file.getOriginalFilename();
         String path = localFileService.upload(name,file);
         return Result.success(path);
+    }
+
+    @PostMapping(value = "img/delete")
+    @ResponseBody
+    public Result<Boolean> deleteImg(String name) throws Exception {
+
+        boolean remove = localFileService.remove(name);
+        return Result.success(remove);
     }
 }
