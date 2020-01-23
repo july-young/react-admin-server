@@ -1,10 +1,15 @@
 package com.july.admin.converter;
 
+import com.alibaba.fastjson.JSON;
 import com.july.admin.bo.ProductBO;
 import com.july.admin.common.Converter;
 import com.july.admin.entity.Product;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author: july
@@ -19,7 +24,15 @@ public class ProductConverter implements Converter<Product,ProductBO> {
             return null;
         }
         ProductBO b = new ProductBO();
+
         BeanUtils.copyProperties(d,b);
+        List<String> list = JSON.parseArray(d.getImgs(), String.class);
+        if(CollectionUtils.isEmpty(list)){
+           b.setImgs(new ArrayList<>());
+        }else{
+            b.setImgs(list);
+        }
+
         return b;
     }
 
@@ -30,6 +43,13 @@ public class ProductConverter implements Converter<Product,ProductBO> {
         }
         Product d = new Product();
         BeanUtils.copyProperties(b,d);
+
+        if(CollectionUtils.isEmpty(b.getImgs())){
+            d.setImgs("[]");
+        }else{
+            d.setImgs(JSON.toJSONString(b.getImgs()));
+        }
+
         return d;
     }
 }

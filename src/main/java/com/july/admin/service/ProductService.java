@@ -14,13 +14,46 @@ import com.july.admin.query.ProductQuery;
  */
 public interface ProductService {
 
+    /**
+     * 查询
+     * @param productQuery
+     * @return
+     */
     PageInfo<ProductBO> query(ProductQuery productQuery);
 
+    /**
+     * 根据Id查询
+     * @param id
+     * @return
+     */
+    ProductBO find(Long id);
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
     Integer remove(Long id);
 
+    /**
+     * 更新
+     * @param bo
+     * @return
+     */
     ProductBO update(ProductBO bo);
 
+    /**
+     * 添加
+     * @param bo
+     * @return
+     */
     ProductBO add(ProductBO bo);
 
+    /**
+     * 上架/下架
+     * @param id
+     * @param productStatusEnum
+     * @return
+     */
     int updateStatus(Long id, ProductStatusEnum productStatusEnum);
 }

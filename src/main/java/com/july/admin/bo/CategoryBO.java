@@ -8,4 +8,6 @@ import com.july.admin.entity.Category;
  * @description:
  */
 public class CategoryBO extends Category {
+
+
 }

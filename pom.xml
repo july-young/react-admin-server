@@ -24,6 +24,7 @@
         <jsqlparser.version>0.9.1</jsqlparser.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-net.version>3.1</commons-net.version>
+        <fastjson.version>1.2.46</fastjson.version>
     </properties>
 
     <dependencies>
@@ -109,6 +110,11 @@
             <artifactId>joda-time</artifactId>
             <version>${joda.time.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -146,14 +152,14 @@
             </plugin>
         </plugins>
 
-            <resources>
-                <resource>
-                    <directory>src/main/java</directory>
-                    <includes>
-                        <include>**/*.xml</include>
-                    </includes>
-                </resource>
-            </resources>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>

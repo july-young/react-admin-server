@@ -12,4 +12,6 @@ public class ReactAdminConstant {
         public static final byte VALID=1;
         public static final byte DELETED=0;
     }
+
+    public static final Long CATEGORY_ROOT_ID=0L;
 }

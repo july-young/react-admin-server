@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: july
@@ -25,7 +26,7 @@ public class ProductUpdateForm implements FormConverter<ProductBO> {
 
     private Byte state;
 
-    private String imgs;
+    private List<String> imgs;
 
     private BigDecimal price;
 
@@ -34,6 +35,9 @@ public class ProductUpdateForm implements FormConverter<ProductBO> {
     private Long pCategoryId;
 
     private Long categoryId;
+
+
+    private String description;
 
     public Long getId() {
         return id;
@@ -83,11 +87,11 @@ public class ProductUpdateForm implements FormConverter<ProductBO> {
         this.state = state;
     }
 
-    public String getImgs() {
+    public List<String> getImgs() {
         return imgs;
     }
 
-    public void setImgs(String imgs) {
+    public void setImgs(List<String> imgs) {
         this.imgs = imgs;
     }
 
@@ -121,6 +125,14 @@ public class ProductUpdateForm implements FormConverter<ProductBO> {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

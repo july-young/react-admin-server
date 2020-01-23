@@ -45,6 +45,17 @@ public class ProductController {
         return Result.success(pageInfo);
     }
 
+    @GetMapping("product")
+    @ResponseBody
+    public Result query(Long productId) throws JsonProcessingException {
+
+        logger.info("query=>productId : "+productId);
+
+        ProductBO productBO = productService.find(productId);
+
+        return Result.success(productBO);
+    }
+
     @PostMapping("product")
     @ResponseBody
     public Result<ProductBO> add(@RequestBody ProductAddForm form) throws JsonProcessingException {
@@ -62,7 +73,7 @@ public class ProductController {
 
         logger.info("update=>form : "+new ObjectMapper().writeValueAsString(form));
 
-        ProductBO productBO = productService.add(form.toBO());
+        ProductBO productBO = productService.update(form.toBO());
 
         return Result.success(productBO);
     }

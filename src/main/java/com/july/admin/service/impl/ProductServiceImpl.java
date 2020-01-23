@@ -56,6 +56,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public ProductBO find(Long id) {
+        Product product = productMapper.selectByPrimaryKey(id);
+        return productConverter.convert(product);
+    }
+
+    @Override
     public Integer remove(Long id) {
         return productMapper.deleteByPrimaryKey(id);
     }

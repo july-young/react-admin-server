@@ -1,5 +1,7 @@
 package com.july.admin.form;
 
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.july.admin.bo.ProductBO;
 import com.july.admin.common.FormConverter;
 import com.july.admin.entity.Product;
@@ -7,6 +9,7 @@ import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: july
@@ -21,7 +24,7 @@ public class ProductAddForm implements FormConverter<ProductBO> {
 
     private Byte state;
 
-    private String imgs;
+    private List<String> imgs;
 
     private BigDecimal price;
 
@@ -55,14 +58,6 @@ public class ProductAddForm implements FormConverter<ProductBO> {
 
     public void setState(Byte state) {
         this.state = state;
-    }
-
-    public String getImgs() {
-        return imgs;
-    }
-
-    public void setImgs(String imgs) {
-        this.imgs = imgs;
     }
 
     public BigDecimal getPrice() {
@@ -101,6 +96,7 @@ public class ProductAddForm implements FormConverter<ProductBO> {
     public ProductBO toBO() {
         ProductBO productBO = new ProductBO();
         BeanUtils.copyProperties(this,productBO);
+        productBO.setImgs(this.getImgs());
         return productBO;
     }
 
@@ -110,5 +106,13 @@ public class ProductAddForm implements FormConverter<ProductBO> {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<String> getImgs() {
+        return imgs;
+    }
+
+    public void setImgs(List<String> imgs) {
+        this.imgs = imgs;
     }
 }
