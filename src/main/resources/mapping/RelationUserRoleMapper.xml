@@ -5,6 +5,8 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
     <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="creator" jdbcType="BIGINT" property="creator" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, user_id, role_id
+    id, user_id, role_id, gmt_create, creator
   </sql>
   <select id="selectByExample" parameterType="com.july.admin.entity.RelationUserRoleExample" resultMap="BaseResultMap">
     select
@@ -98,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.july.admin.entity.RelationUserRole">
-    insert into r_user_role (id, user_id, role_id
-      )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}
-      )
+    insert into r_user_role (id, user_id, role_id, 
+      gmt_create, creator)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, 
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{creator,jdbcType=BIGINT})
   </insert>
   <insert id="insertSelective" parameterType="com.july.admin.entity.RelationUserRole">
     insert into r_user_role
@@ -115,6 +117,12 @@
       <if test="roleId != null">
         role_id,
       </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -125,6 +133,12 @@
       </if>
       <if test="roleId != null">
         #{roleId,jdbcType=BIGINT},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -146,6 +160,12 @@
       <if test="record.roleId != null">
         role_id = #{record.roleId,jdbcType=BIGINT},
       </if>
+      <if test="record.gmtCreate != null">
+        gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=BIGINT},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +175,9 @@
     update r_user_role
     set id = #{record.id,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
-      role_id = #{record.roleId,jdbcType=BIGINT}
+      role_id = #{record.roleId,jdbcType=BIGINT},
+      gmt_create = #{record.gmtCreate,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=BIGINT}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +191,21 @@
       <if test="roleId != null">
         role_id = #{roleId,jdbcType=BIGINT},
       </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.july.admin.entity.RelationUserRole">
     update r_user_role
     set user_id = #{userId,jdbcType=BIGINT},
-      role_id = #{roleId,jdbcType=BIGINT}
+      role_id = #{roleId,jdbcType=BIGINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

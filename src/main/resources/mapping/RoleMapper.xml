@@ -9,6 +9,9 @@
     <result column="state" jdbcType="TINYINT" property="state" />
     <result column="creator" jdbcType="BIGINT" property="creator" />
     <result column="updater" jdbcType="BIGINT" property="updater" />
+    <result column="gmt_auth" jdbcType="TIMESTAMP" property="gmtAuth" />
+    <result column="auth_user_id" jdbcType="BIGINT" property="authUserId" />
+    <result column="auth_user_name" jdbcType="VARCHAR" property="authUserName" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, gmt_create, gmt_update, state, creator, updater
+    id, name, gmt_create, gmt_update, state, creator, updater, gmt_auth, auth_user_id, 
+    auth_user_name
   </sql>
   <select id="selectByExample" parameterType="com.july.admin.entity.RoleExample" resultMap="BaseResultMap">
     select
@@ -104,10 +108,12 @@
   <insert id="insert" parameterType="com.july.admin.entity.Role">
     insert into t_role (id, name, gmt_create, 
       gmt_update, state, creator, 
-      updater)
+      updater, gmt_auth, auth_user_id, 
+      auth_user_name)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, 
       #{gmtUpdate,jdbcType=TIMESTAMP}, #{state,jdbcType=TINYINT}, #{creator,jdbcType=BIGINT}, 
-      #{updater,jdbcType=BIGINT})
+      #{updater,jdbcType=BIGINT}, #{gmtAuth,jdbcType=TIMESTAMP}, #{authUserId,jdbcType=BIGINT}, 
+      #{authUserName,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.july.admin.entity.Role">
     insert into t_role
@@ -133,6 +139,15 @@
       <if test="updater != null">
         updater,
       </if>
+      <if test="gmtAuth != null">
+        gmt_auth,
+      </if>
+      <if test="authUserId != null">
+        auth_user_id,
+      </if>
+      <if test="authUserName != null">
+        auth_user_name,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -155,6 +170,15 @@
       </if>
       <if test="updater != null">
         #{updater,jdbcType=BIGINT},
+      </if>
+      <if test="gmtAuth != null">
+        #{gmtAuth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authUserId != null">
+        #{authUserId,jdbcType=BIGINT},
+      </if>
+      <if test="authUserName != null">
+        #{authUserName,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -188,6 +212,15 @@
       <if test="record.updater != null">
         updater = #{record.updater,jdbcType=BIGINT},
       </if>
+      <if test="record.gmtAuth != null">
+        gmt_auth = #{record.gmtAuth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.authUserId != null">
+        auth_user_id = #{record.authUserId,jdbcType=BIGINT},
+      </if>
+      <if test="record.authUserName != null">
+        auth_user_name = #{record.authUserName,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +234,10 @@
       gmt_update = #{record.gmtUpdate,jdbcType=TIMESTAMP},
       state = #{record.state,jdbcType=TINYINT},
       creator = #{record.creator,jdbcType=BIGINT},
-      updater = #{record.updater,jdbcType=BIGINT}
+      updater = #{record.updater,jdbcType=BIGINT},
+      gmt_auth = #{record.gmtAuth,jdbcType=TIMESTAMP},
+      auth_user_id = #{record.authUserId,jdbcType=BIGINT},
+      auth_user_name = #{record.authUserName,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +263,15 @@
       <if test="updater != null">
         updater = #{updater,jdbcType=BIGINT},
       </if>
+      <if test="gmtAuth != null">
+        gmt_auth = #{gmtAuth,jdbcType=TIMESTAMP},
+      </if>
+      <if test="authUserId != null">
+        auth_user_id = #{authUserId,jdbcType=BIGINT},
+      </if>
+      <if test="authUserName != null">
+        auth_user_name = #{authUserName,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -237,7 +282,10 @@
       gmt_update = #{gmtUpdate,jdbcType=TIMESTAMP},
       state = #{state,jdbcType=TINYINT},
       creator = #{creator,jdbcType=BIGINT},
-      updater = #{updater,jdbcType=BIGINT}
+      updater = #{updater,jdbcType=BIGINT},
+      gmt_auth = #{gmtAuth,jdbcType=TIMESTAMP},
+      auth_user_id = #{authUserId,jdbcType=BIGINT},
+      auth_user_name = #{authUserName,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

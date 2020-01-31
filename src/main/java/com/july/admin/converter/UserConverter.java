@@ -3,12 +3,9 @@ package com.july.admin.converter;
 import com.july.admin.bo.UserBO;
 import com.july.admin.common.Converter;
 import com.july.admin.entity.User;
-import com.july.admin.util.ReactAdminCollectionUtils;
 import com.july.admin.vo.UserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * @author: july

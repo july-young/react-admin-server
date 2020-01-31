@@ -1,14 +1,8 @@
 package com.july.admin.entity;
 
-
-import com.july.admin.common.ToString;
-
 import java.util.Date;
 
-/**
- * @author july
- */
-public class Role extends ToString {
+public class Role {
     private Long id;
 
     private String name;
@@ -22,6 +16,12 @@ public class Role extends ToString {
     private Long creator;
 
     private Long updater;
+
+    private Date gmtAuth;
+
+    private Long authUserId;
+
+    private String authUserName;
 
     public Long getId() {
         return id;
@@ -77,5 +77,29 @@ public class Role extends ToString {
 
     public void setUpdater(Long updater) {
         this.updater = updater;
+    }
+
+    public Date getGmtAuth() {
+        return gmtAuth;
+    }
+
+    public void setGmtAuth(Date gmtAuth) {
+        this.gmtAuth = gmtAuth;
+    }
+
+    public Long getAuthUserId() {
+        return authUserId;
+    }
+
+    public void setAuthUserId(Long authUserId) {
+        this.authUserId = authUserId;
+    }
+
+    public String getAuthUserName() {
+        return authUserName;
+    }
+
+    public void setAuthUserName(String authUserName) {
+        this.authUserName = authUserName;
     }
 }

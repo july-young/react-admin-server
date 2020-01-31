@@ -5,7 +5,7 @@ import com.july.admin.bo.RoleBO;
 import com.july.admin.common.Converter;
 import com.july.admin.entity.Role;
 import com.july.admin.service.PermissionService;
-import com.july.admin.util.ReactAdminCollectionUtils;
+import com.july.admin.util.RACollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -34,7 +34,7 @@ public class RoleConverter implements Converter<Role, RoleBO> {
          */
         List<PermissionBO> permissions = permissionService.getMenus();
 
-        List<RoleBO> roleBOS = ReactAdminCollectionUtils.extractList(list, x -> convert(x));
+        List<RoleBO> roleBOS = RACollectionUtils.extractList(list, x -> convert(x));
 
         for (RoleBO roleBO : roleBOS) {
             for (PermissionBO permission : permissions) {

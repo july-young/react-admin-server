@@ -4,7 +4,7 @@ import com.july.admin.bo.PermissionBO;
 import com.july.admin.common.Converter;
 import com.july.admin.dto.PermissionTreeDTO;
 import com.july.admin.entity.Permission;
-import com.july.admin.util.ReactAdminCollectionUtils;
+import com.july.admin.util.RACollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class PermissionConverter implements Converter<Permission, PermissionBO> 
 
     public List<PermissionTreeDTO> convert2DTO(List<PermissionBO> boList){
 
-        List<PermissionTreeDTO> dtoList = ReactAdminCollectionUtils.extractList(boList, x -> {
+        List<PermissionTreeDTO> dtoList = RACollectionUtils.extractList(boList, x -> {
             PermissionTreeDTO dto = new PermissionTreeDTO();
             BeanUtils.copyProperties(x, dto);
             return dto;

@@ -12,7 +12,7 @@ import com.july.admin.entity.ProductExample;
 import com.july.admin.enums.ProductStatusEnum;
 import com.july.admin.query.ProductQuery;
 import com.july.admin.service.ProductService;
-import com.july.admin.util.ReactAdminCollectionUtils;
+import com.july.admin.util.RACollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
         PageHelper.startPage(productQuery.getPage(),productQuery.getSize());
         List<Product> products = productMapper.selectByExample(example);
 
-        List<ProductBO> productBOS = ReactAdminCollectionUtils.extractList(products, x -> productConverter.convert(x));
+        List<ProductBO> productBOS = RACollectionUtils.extractList(products, x -> productConverter.convert(x));
 
         return new PageInfo<ProductBO>(productBOS);
     }

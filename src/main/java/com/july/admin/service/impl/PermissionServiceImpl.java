@@ -1,8 +1,7 @@
 package com.july.admin.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.july.admin.bo.PermissionBO;
-import com.july.admin.bo.RoleBO;
-import com.july.admin.common.Converter;
 import com.july.admin.constant.PermissionConstant;
 import com.july.admin.constant.ReactAdminConstant;
 import com.july.admin.converter.PermissionConverter;
@@ -11,10 +10,9 @@ import com.july.admin.dao.RelationRolePermissionMapper;
 import com.july.admin.dao.RoleMapper;
 import com.july.admin.dto.PermissionTreeDTO;
 import com.july.admin.entity.*;
+import com.july.admin.query.MenuQuery;
 import com.july.admin.service.PermissionService;
-import com.july.admin.service.RoleService;
-import com.july.admin.util.ReactAdminCollectionUtils;
-import org.springframework.beans.BeanUtils;
+import com.july.admin.util.RACollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -73,23 +71,41 @@ public class PermissionServiceImpl implements PermissionService {
         return permissionConverter.convert2DTO(rolePermissions);
     }
 
+    @Override
+    public List<PermissionBO> getMenus(MenuQuery query) {
+
+        query.check();
+        PageHelper.startPage(query.getPage(),query.getSize());
+        RelationRolePermissionExample rrpe = new RelationRolePermissionExample();
+        rrpe.createCriteria().andRoleIdEqualTo(query.getRoleId());
+        List<RelationRolePermission> relationRolePermissions = relationRolePermissionMapper.selectByExample(rrpe);
+        List<Long> permissionIds = RACollectionUtils.extractList(relationRolePermissions, x -> x.getPermissionId());
+        PermissionExample permissionExample = new PermissionExample();
+        permissionExample.createCriteria()
+                .andIdIn(permissionIds)
+                .andStateEqualTo(ReactAdminConstant.MetaState.VALID)
+                .andTypeEqualTo(PermissionConstant.TYPE_PAGE);
+        List<Permission> permissions = permissionMapper.selectByExample(permissionExample);
+        return convert(permissions);
+    }
+
     public List<PermissionBO> convert(List<Permission> permissions) {
         if (CollectionUtils.isEmpty(permissions)) {
             return new ArrayList<>();
         }
         RelationRolePermissionExample relationRolePermissionExample = new RelationRolePermissionExample();
-        List<Long> permissionIds = ReactAdminCollectionUtils.extractList(permissions, x -> x.getId());
+        List<Long> permissionIds = RACollectionUtils.extractList(permissions, x -> x.getId());
         relationRolePermissionExample.createCriteria().andPermissionIdIn(permissionIds);
         List<RelationRolePermission> relationRolePermissions = relationRolePermissionMapper.selectByExample(relationRolePermissionExample);
 
-        List<Long> roleIds = ReactAdminCollectionUtils.toSetList(relationRolePermissions, x -> x.getRoleId());
+        List<Long> roleIds = RACollectionUtils.toSetList(relationRolePermissions, x -> x.getRoleId());
         RoleExample roleExample = new RoleExample();
         roleExample.createCriteria().andStateEqualTo(ReactAdminConstant.MetaState.VALID)
                 .andIdIn(roleIds);
         List<Role> roles = CollectionUtils.isEmpty(roleIds) ? new ArrayList<>() : roleMapper.selectByExample(roleExample);
 
         Map<Long, Long> relationMap = relationRolePermissions.stream().collect(Collectors.toMap(RelationRolePermission::getPermissionId, RelationRolePermission::getRoleId, (oldVal, newVal) -> newVal));
-        Map<Long, String> roleMap = ReactAdminCollectionUtils.toMap(roles, x -> x.getId(), x -> x.getName());
+        Map<Long, String> roleMap = RACollectionUtils.toMap(roles, x -> x.getId(), x -> x.getName());
 
         return permissions.stream().map(x -> {
             PermissionBO permissionBO = permissionConverter.convert(x);

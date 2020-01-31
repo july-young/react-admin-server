@@ -2,6 +2,7 @@ package com.july.admin.service;
 
 import com.july.admin.bo.PermissionBO;
 import com.july.admin.dto.PermissionTreeDTO;
+import com.july.admin.query.MenuQuery;
 
 import java.util.List;
 
@@ -29,4 +30,11 @@ public interface PermissionService {
      * @return
      */
     List<PermissionTreeDTO> getPermissionsInTree();
+
+    /**
+     * 查询权限
+     * @param query
+     * @return
+     */
+    List<PermissionBO> getMenus(MenuQuery query);
 }

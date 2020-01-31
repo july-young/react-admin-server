@@ -12,7 +12,7 @@ import com.july.admin.entity.Category;
 import com.july.admin.entity.CategoryExample;
 import com.july.admin.query.CategoryQuery;
 import com.july.admin.service.CategoryService;
-import com.july.admin.util.ReactAdminCollectionUtils;
+import com.july.admin.util.RACollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +44,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         PageHelper.startPage(categoryQuery.getPage(), categoryQuery.getSize());
         List<Category> categories = categoryMapper.selectByExample(categoryExample);
-        List<CategoryBO> list = ReactAdminCollectionUtils.extractList(categories, x -> categoryConverter.convert(x));
+        List<CategoryBO> list = RACollectionUtils.extractList(categories, x -> categoryConverter.convert(x));
         return new PageInfo<CategoryBO>(list);
     }
 
@@ -87,11 +87,11 @@ public class CategoryServiceImpl implements CategoryService {
         categoryExample.createCriteria()
                 .andStateEqualTo(ReactAdminConstant.MetaState.VALID);
         List<Category> categories = categoryMapper.selectByExample(categoryExample);
-        List<CategoryBO> list = ReactAdminCollectionUtils.extractList(categories, x -> categoryConverter.convert(x));
+        List<CategoryBO> list = RACollectionUtils.extractList(categories, x -> categoryConverter.convert(x));
         Stack<CategoryBO> stack = new Stack();
         findParents(list,id,stack);
 
-        return ReactAdminCollectionUtils.toList(stack);
+        return RACollectionUtils.toList(stack);
     }
 
     @Override
@@ -100,7 +100,7 @@ public class CategoryServiceImpl implements CategoryService {
         categoryExample.createCriteria()
                 .andStateEqualTo(ReactAdminConstant.MetaState.VALID);
         List<Category> categories = categoryMapper.selectByExample(categoryExample);
-        List<CategoryBO> list = ReactAdminCollectionUtils.extractList(categories, x -> categoryConverter.convert(x));
+        List<CategoryBO> list = RACollectionUtils.extractList(categories, x -> categoryConverter.convert(x));
         return categoryConverter.convert2DTO(list);
     }
 

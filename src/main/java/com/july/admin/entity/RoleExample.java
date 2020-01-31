@@ -534,6 +534,196 @@ public class RoleExample {
             addCriterion("updater not between", value1, value2, "updater");
             return (Criteria) this;
         }
+
+        public Criteria andGmtAuthIsNull() {
+            addCriterion("gmt_auth is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthIsNotNull() {
+            addCriterion("gmt_auth is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthEqualTo(Date value) {
+            addCriterion("gmt_auth =", value, "gmtAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthNotEqualTo(Date value) {
+            addCriterion("gmt_auth <>", value, "gmtAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthGreaterThan(Date value) {
+            addCriterion("gmt_auth >", value, "gmtAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthGreaterThanOrEqualTo(Date value) {
+            addCriterion("gmt_auth >=", value, "gmtAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthLessThan(Date value) {
+            addCriterion("gmt_auth <", value, "gmtAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthLessThanOrEqualTo(Date value) {
+            addCriterion("gmt_auth <=", value, "gmtAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthIn(List<Date> values) {
+            addCriterion("gmt_auth in", values, "gmtAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthNotIn(List<Date> values) {
+            addCriterion("gmt_auth not in", values, "gmtAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthBetween(Date value1, Date value2) {
+            addCriterion("gmt_auth between", value1, value2, "gmtAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andGmtAuthNotBetween(Date value1, Date value2) {
+            addCriterion("gmt_auth not between", value1, value2, "gmtAuth");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdIsNull() {
+            addCriterion("auth_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdIsNotNull() {
+            addCriterion("auth_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdEqualTo(Long value) {
+            addCriterion("auth_user_id =", value, "authUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdNotEqualTo(Long value) {
+            addCriterion("auth_user_id <>", value, "authUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdGreaterThan(Long value) {
+            addCriterion("auth_user_id >", value, "authUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("auth_user_id >=", value, "authUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdLessThan(Long value) {
+            addCriterion("auth_user_id <", value, "authUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdLessThanOrEqualTo(Long value) {
+            addCriterion("auth_user_id <=", value, "authUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdIn(List<Long> values) {
+            addCriterion("auth_user_id in", values, "authUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdNotIn(List<Long> values) {
+            addCriterion("auth_user_id not in", values, "authUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdBetween(Long value1, Long value2) {
+            addCriterion("auth_user_id between", value1, value2, "authUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserIdNotBetween(Long value1, Long value2) {
+            addCriterion("auth_user_id not between", value1, value2, "authUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameIsNull() {
+            addCriterion("auth_user_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameIsNotNull() {
+            addCriterion("auth_user_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameEqualTo(String value) {
+            addCriterion("auth_user_name =", value, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameNotEqualTo(String value) {
+            addCriterion("auth_user_name <>", value, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameGreaterThan(String value) {
+            addCriterion("auth_user_name >", value, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameGreaterThanOrEqualTo(String value) {
+            addCriterion("auth_user_name >=", value, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameLessThan(String value) {
+            addCriterion("auth_user_name <", value, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameLessThanOrEqualTo(String value) {
+            addCriterion("auth_user_name <=", value, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameLike(String value) {
+            addCriterion("auth_user_name like", value, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameNotLike(String value) {
+            addCriterion("auth_user_name not like", value, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameIn(List<String> values) {
+            addCriterion("auth_user_name in", values, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameNotIn(List<String> values) {
+            addCriterion("auth_user_name not in", values, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameBetween(String value1, String value2) {
+            addCriterion("auth_user_name between", value1, value2, "authUserName");
+            return (Criteria) this;
+        }
+
+        public Criteria andAuthUserNameNotBetween(String value1, String value2) {
+            addCriterion("auth_user_name not between", value1, value2, "authUserName");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

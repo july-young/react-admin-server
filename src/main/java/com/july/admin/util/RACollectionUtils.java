@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * @date: 2020/1/7 08:43
  * @description:
  */
-public class ReactAdminCollectionUtils extends CollectionUtils {
+public class RACollectionUtils extends CollectionUtils {
 
     public static <T, R> List<R> extractList(Collection<T> collection, Function<T, R> function) {
         return collection.stream().filter(Objects::nonNull).map(function).filter(Objects::nonNull).collect(Collectors.toList());

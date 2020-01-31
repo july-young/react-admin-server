@@ -28,11 +28,13 @@ public class BaseQuery extends ToString{
     }
 
     public void check(){
+        //不传 默认第一页
         if(page==null || page<0 ){
             page=1;
         }
+        //不传 默认查2000条
         if(size==null || size <0){
-            size=10;
+            size=2000;
         }
     }
 }

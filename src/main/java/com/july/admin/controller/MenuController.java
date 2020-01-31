@@ -1,7 +1,9 @@
 package com.july.admin.controller;
 
+import com.july.admin.bo.PermissionBO;
 import com.july.admin.common.Result;
 import com.july.admin.dto.PermissionTreeDTO;
+import com.july.admin.query.MenuQuery;
 import com.july.admin.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -21,6 +23,7 @@ public class MenuController {
 
     @Autowired
     private PermissionService permissionService;
+
     @GetMapping("menu")
     @ResponseBody
     @Cacheable("menu")
@@ -29,5 +32,14 @@ public class MenuController {
         List<PermissionTreeDTO> list =  permissionService.getPermissionsInTree();
 
         return Result.success(list);
+    }
+
+    @GetMapping("menus")
+    @ResponseBody
+    public Result menus(MenuQuery query){
+
+        List<PermissionBO> menus = permissionService.getMenus(query);
+
+        return Result.success(menus);
     }
 }

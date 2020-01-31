@@ -4,7 +4,7 @@ import com.july.admin.bo.CategoryBO;
 import com.july.admin.common.Converter;
 import com.july.admin.dto.CategoryTreeDTO;
 import com.july.admin.entity.Category;
-import com.july.admin.util.ReactAdminCollectionUtils;
+import com.july.admin.util.RACollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +40,7 @@ public class CategoryConverter implements Converter<Category,CategoryBO> {
 
     public List<CategoryTreeDTO> convert2DTO(List<CategoryBO> boList){
 
-        List<CategoryTreeDTO> dtoList = ReactAdminCollectionUtils.extractList(boList, x -> {
+        List<CategoryTreeDTO> dtoList = RACollectionUtils.extractList(boList, x -> {
             CategoryTreeDTO dto = new CategoryTreeDTO();
             BeanUtils.copyProperties(x, dto);
             return dto;
