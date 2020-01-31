@@ -60,6 +60,13 @@ public class SecurityUtil {
         return (UserBO) getAuthentication().getPrincipal();
     }
 
+    public static Long getUserId(){
+        return getUser().getId();
+    }
+
+    public static String getUsername(){
+        return getUser().getUsername();
+    }
     /**
      * 注销
      */

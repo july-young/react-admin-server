@@ -1,6 +1,7 @@
 package com.july.admin.vo;
 
 import com.july.admin.bo.RoleBO;
+import com.july.admin.common.ToString;
 import org.springframework.security.core.Authentication;
 
 import java.io.Serializable;
@@ -11,13 +12,15 @@ import java.util.List;
  * @date: 2020/1/8 23:14
  * @description:
  */
-public class UserVO implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class UserVO extends ToString {
 
     private String username;
 
     private Long userId;
+
+    private String phone;
+
+    private String email;
 
     private List<RoleBO> roles;
 
@@ -43,5 +46,21 @@ public class UserVO implements Serializable {
 
     public void setRoles(List<RoleBO> roles) {
         this.roles = roles;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

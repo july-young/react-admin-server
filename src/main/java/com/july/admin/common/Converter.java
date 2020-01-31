@@ -1,5 +1,9 @@
 package com.july.admin.common;
 
+import com.july.admin.util.RACollectionUtils;
+
+import java.util.List;
+
 /**
  * @author: july
  * @date: 2020/1/6 23:44
@@ -19,4 +23,13 @@ public interface Converter<DO,BO> {
      * @return
      */
     DO revert(BO b);
+
+    /**
+     * 批量转换为BO
+     * @param list
+     * @return
+     */
+    default List<BO> convert(List<DO> list){
+        return RACollectionUtils.extractList(list,x->convert(x));
+    }
 }

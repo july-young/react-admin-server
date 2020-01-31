@@ -24,6 +24,7 @@ public class RoleConverter implements Converter<Role, RoleBO> {
     @Autowired
     private PermissionService permissionService;
 
+    @Override
     public List<RoleBO> convert(List<Role> list) {
         if (CollectionUtils.isEmpty(list)) {
             return new ArrayList<RoleBO>();

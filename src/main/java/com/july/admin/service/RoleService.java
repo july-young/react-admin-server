@@ -2,9 +2,11 @@ package com.july.admin.service;
 
 import com.july.admin.bo.RoleBO;
 import com.july.admin.common.Page;
+import com.july.admin.entity.Role;
 import com.july.admin.query.RoleQuery;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: july
@@ -27,6 +29,13 @@ public interface RoleService {
     List<RoleBO> getRolesByIds(List<Long> roleIds);
 
     /**
+     * 根据id结合查找
+     * @param userIds
+     * @return
+     */
+    Map<Long,List<RoleBO>> getRolesByUserIds(List<Long> userIds);
+
+    /**
      * 分页查找
      * @param query
      * @return
@@ -40,4 +49,5 @@ public interface RoleService {
     Integer remove(Long id);
 
     RoleBO find(Long id);
+
 }

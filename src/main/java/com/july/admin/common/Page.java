@@ -51,7 +51,7 @@ public class Page<T> extends ToString{
     public static <T> Page<T> getInstance(PageInfo pageInfo){
         Page<T> page= new Page<>();
         page.setList(pageInfo.getList());
-        page.setPage(pageInfo.getPageSize());
+        page.setPage(pageInfo.getPageNum());
         page.setSize(pageInfo.getSize());
         page.setTotal(pageInfo.getTotal());
         return page;
