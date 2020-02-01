@@ -8,6 +8,7 @@ import org.apache.commons.net.ftp.FTPReply;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,7 @@ import java.util.UUID;
  * @date: 2020/1/15 22:42
  * @description:
  */
+@Profile("prod")
 @Service("fileStoreService")
 public class FtpFileServiceImpl implements FileStoreService {
 
