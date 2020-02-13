@@ -5,6 +5,7 @@ import com.july.admin.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,8 +19,8 @@ import java.util.Date;
  * @date: 2020/2/1 01:09
  * @description:
  */
-@Profile({"pre","dev"})
 @Service("fileStoreService")
+@ConditionalOnProperty(value = "ftp.start", havingValue = "false")
 public class LocalFileServiceImpl  implements FileStoreService{
 
     private static Logger logger= LoggerFactory.getLogger(LocalFileServiceImpl.class);

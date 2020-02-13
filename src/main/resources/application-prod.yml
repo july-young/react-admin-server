@@ -42,6 +42,7 @@ redis:
 
 
 ftp:
+  start: true
   server:
     ip: 47.91.214.23
     http:
