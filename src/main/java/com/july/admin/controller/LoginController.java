@@ -18,9 +18,9 @@ import java.util.List;
 @Controller
 public class LoginController {
 
-    @GetMapping("login")
+    @GetMapping("/")
     public String menu(){
 
-       return "login.html";
+       return "index.html";
     }
 }
