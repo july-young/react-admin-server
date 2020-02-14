@@ -11,3 +11,8 @@ npm install http-server -g
 
 登录名称 admin
 密码    123456
+
+2、linux线上单机
+mkdir -p /home/ftpuser/www
+chmod 777 /home/ftpuser/www
+配置nginx 参考doc下的文件
