@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: /ra
+
 spring:
   profiles:
     active: dev
