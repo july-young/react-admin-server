@@ -19,7 +19,7 @@ import java.util.List;
 public class LoginController {
 
     @GetMapping("/")
-    public String menu(){
+    public String login(){
 
        return "index.html";
     }

@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.less"],"names":[],"mappings":"AAAA,aACE,4BAA6B,CAC7B,WAAY,CACZ,YAAa,CACb,aAAc,CACd,cACF","file":"88.6f0a3431.chunk.css","sourcesContent":[".link-button {\n  background-color: transparent;\n  border: none;\n  outline: none;\n  color: #1da57a;\n  cursor: pointer;\n}\n"]}

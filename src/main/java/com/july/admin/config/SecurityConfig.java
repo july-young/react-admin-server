@@ -43,7 +43,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private LoginFailureHandler loginFailureHandler;
-
     /**
      * 配置加密方式
      * @return

@@ -33,9 +33,9 @@ public class WebDataConvertConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("classpath:/css/");
+        registry.addResourceHandler("/index.html").addResourceLocations("classpath:/static/");
 
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/static/");
-        registry.addResourceHandler("/index.html").addResourceLocations("classpath:/static/");
     }
 
 
