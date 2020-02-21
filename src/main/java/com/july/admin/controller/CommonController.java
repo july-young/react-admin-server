@@ -1,7 +1,10 @@
 package com.july.admin.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.july.admin.common.Result;
 import com.july.admin.service.FileStoreService;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
@@ -27,16 +30,18 @@ public class CommonController {
     @Autowired
     private FileStoreService localFileService;
 
-    @GetMapping("weather")
+    @GetMapping(value = "weather")
     @ResponseBody
-    @Cacheable(value = "weather",key = "#cityId")
-    public Result getWeather(String cityId){
+    @CrossOrigin("*")
+    @Cacheable(value = "weather", key = "#cityId")
+    public Object getWeather(String cityId,@RequestParam(required = false) String callback) {
         RestTemplate restTemplate = new RestTemplate();
 
-        Map<String,Object> map = restTemplate
+        Map<String, Object> map = restTemplate
                 .getForObject("http://t.weather.sojson.com/api/weather/city/" + cityId,
                         Map.class);
-        return Result.success(map);
+
+        return StringUtils.isBlank(callback) ? Result.success(map) : callback + "(" + JSON.toJSONString(map) + ")";
     }
 
     @PostMapping(value = "img/upload")
@@ -44,7 +49,7 @@ public class CommonController {
     public Result<String> uploadImg(@RequestParam("file") MultipartFile file) throws Exception {
 
         String name = file.getOriginalFilename();
-        String path = localFileService.upload(name,file);
+        String path = localFileService.upload(name, file);
         return Result.success(path);
     }
 
