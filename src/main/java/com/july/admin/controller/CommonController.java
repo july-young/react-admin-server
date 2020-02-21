@@ -28,9 +28,8 @@ public class CommonController {
     @Autowired
     private FileStoreService localFileService;
 
-    @GetMapping(value = "weather", produces="application/javascript;charset=UTF-8")
+    @GetMapping(value = "weather", produces="text/javascript;charset=utf-8")
     @CrossOrigin("*")
-    @Cacheable(value = "weather", key = "#cityId")
     public void getWeather(HttpServletResponse response, String cityId,@RequestParam(required = false) String callback) throws IOException {
         RestTemplate restTemplate = new RestTemplate();
         Map<String, Object> map = restTemplate
