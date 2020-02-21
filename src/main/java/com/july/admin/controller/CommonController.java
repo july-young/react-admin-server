@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Base64;
 import java.util.Map;
 import java.util.Random;
@@ -30,18 +33,20 @@ public class CommonController {
     @Autowired
     private FileStoreService localFileService;
 
-    @GetMapping(value = "weather")
-    @ResponseBody
+    @GetMapping(value = "weather", produces="application/javascript;charset=UTF-8")
     @CrossOrigin("*")
     @Cacheable(value = "weather", key = "#cityId")
-    public Object getWeather(String cityId,@RequestParam(required = false) String callback) {
+    public void getWeather(HttpServletResponse response, String cityId,@RequestParam(required = false) String callback) throws IOException {
         RestTemplate restTemplate = new RestTemplate();
-
         Map<String, Object> map = restTemplate
                 .getForObject("http://t.weather.sojson.com/api/weather/city/" + cityId,
                         Map.class);
-
-        return StringUtils.isBlank(callback) ? Result.success(map) : callback + "(" + JSON.toJSONString(map) + ")";
+        ServletOutputStream out=response.getOutputStream();
+        response.setContentType("text/javascript;charset=utf-8");
+        OutputStreamWriter ow=new OutputStreamWriter(out,"UTF-8");
+        ow.write( callback + "(" + JSON.toJSONString(map) + ")");
+        ow.flush();
+        ow.close();
     }
 
     @PostMapping(value = "img/upload")
