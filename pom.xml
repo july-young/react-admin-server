@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <mysql-connector-java.version>8.0.11</mysql-connector-java.version>
+        <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
         <joda.time.version>2.9.9</joda.time.version>
         <mybatis.version>2.1.1</mybatis.version>
         <beanutils.version>1.8.3</beanutils.version>
