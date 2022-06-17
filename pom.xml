@@ -24,7 +24,7 @@
         <jsqlparser.version>0.9.1</jsqlparser.version>
         <commons-lang.version>2.6</commons-lang.version>
         <commons-net.version>3.1</commons-net.version>
-        <fastjson.version>1.2.46</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
     </properties>
 
     <dependencies>
